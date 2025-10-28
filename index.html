@@ -1,71 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MONEME ON BASE - Coming Soon</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(270deg, #0a0f24, #1b2a4a, #283d6b, #0a0f24);
-    background-size: 600% 600%;
-    animation: gradientShift 15s ease infinite;
-  }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #0a0f24, #1b2a4a, #283d6b, #0a0f24);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+    }
 
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-  h1 {
-    font-size: 3em;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
+    h1 {
+      font-size: 3em;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
-  h2 {
-    font-weight: 400;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+    h2 {
+      font-weight: 400;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
 
-  a {
-    color: #00d8ff;
-    text-decoration: none;
-    font-size: 1.2em;
-    border: 2px solid #00d8ff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-  }
+    a {
+      color: #00d8ff;
+      text-decoration: none;
+      font-size: 1.2em;
+      border: 2px solid #00d8ff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
 
-  a:hover {
-    background-color: #00d8ff;
-    color: #0a0f24;
-  }
+    a:hover {
+      background-color: #00d8ff;
+      color: #0a0f24;
+    }
 
-  img {
-    width: 200px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px #00d8ff);
-  }
-</style>
+    img {
+      width: 200px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 15px #00d8ff);
+    }
+
+    /* Whitelist Section */
+    #whitelist {
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 216, 255, 0.4);
+      backdrop-filter: blur(5px);
+      max-width: 350px;
+    }
+
+    #whitelist h3 {
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #00d8ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #whitelist input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 90%;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    #whitelist button {
+      background-color: #00d8ff;
+      color: #0a0f24;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    #whitelist button:hover {
+      background-color: white;
+      color: #0a0f24;
+    }
+
+    #thanksMessage {
+      color: #00ffae;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <img src="logo.png" alt="MONEME Logo" style="width:200px;margin-bottom:20px;">
+  <img src="logo.PNG" alt="MONEME Logo">
   <h1>MONEME ON BASE</h1>
   <h2>🚀 Coming Soon</h2>
   <a href="https://linktr.ee/monemeonbase" target="_blank">Follow Us Here</a>
   <p>Stay tuned — something exciting is launching soon on Base.</p>
+
+  <!-- Whitelist Section -->
+  <div id="whitelist">
+    <h3>MONEME Closed Beta Access Whitelist</h3>
+    <form id="whitelistForm" onsubmit="return handleSubmit(event)">
+      <input type="email" id="email" placeholder="Enter your Email" required>
+      <input type="text" id="wallet" placeholder="Enter your EVM Wallet Address" required>
+      <button type="submit">Join Whitelist</button>
+    </form>
+    <p id="thanksMessage" style="display:none;">✅ Thanks for joining the MONEME Closed Beta Whitelist!</p>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      document.getElementById("whitelistForm").style.display = "none";
+      document.getElementById("thanksMessage").style.display = "block";
+      return false;
+    }
+  </script>
 </body>
 </html>
