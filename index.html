@@ -41,7 +41,6 @@
       border: 1px solid rgba(255,255,255,0.03);
     }
 
-    /* Logo + Header */
     .logo-wrap{display:flex;align-items:center;gap:16px;justify-content:center}
     .logo-wrap img{width:84px;height:84px;border-radius:16px;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,216,255,0.12));}
     h1{margin:0;font-size:26px;letter-spacing:1.6px;text-transform:uppercase}
@@ -55,7 +54,6 @@
 
     .note{color:#bcd6e6;margin-top:12px;font-size:14px}
 
-    /* Whitelist */
     #whitelist{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:12px}
     #whitelist h3{color:var(--accent);margin:0;text-transform:uppercase;letter-spacing:1px}
     input[type="text"]{
@@ -71,10 +69,8 @@
 
     #thanksMessage{display:none;color:#7cffc6;font-weight:700;margin-top:8px;font-size:15px}
 
-    .small{font-size:13px;color:#bfcdd9;margin-top:12px}
     footer{margin-top:18px;font-size:13px;color:#93b7c7}
 
-    /* subtle pulse border for whitelist container */
     .glow {
       padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       box-shadow: 0 6px 30px rgba(15,40,80,0.4), 0 0 40px rgba(0,216,255,0.06) inset;
@@ -125,15 +121,12 @@
       </form>
 
       <p id="thanksMessage">✅ Thanks <span id="usernameTag">friend</span>! You’re on the MONEME Closed Beta Whitelist.</p>
-      <p class="small">No data stored. This is a client-side flow for demo/whitelist purposes.</p>
-      <footer>Tip: For identity auto-fill, open the page inside Farcaster or Base App (in-app browser).</footer>
+
+      <footer>Tip: For identity auto-fill, open this page inside Farcaster or Base App (in-app browser).</footer>
     </div>
   </div>
 
-  <!-- OnchainKit import (works inside Base) and generic identity try-catch -->
   <script type="module">
-    // Try using Base OnchainKit if available; not required for Farcaster path (Farcaster uses its own SDK).
-    // We'll attempt Base OnchainKit but continue gracefully if not present.
     let triedOnchainKit = false;
     async function tryBaseOnchainKit() {
       try {
@@ -141,43 +134,30 @@
         const { createOnchainKit } = await import('https://cdn.jsdelivr.net/npm/@base-org/onchainkit/dist/index.min.js');
         const onchain = createOnchainKit({ appName: 'MONEME', appURL: 'https://moneme.app' });
         const id = await onchain.identity.get().catch(()=>null);
-        if (id && id.username) {
-          setUsername('@' + id.username);
-        }
-      } catch(e){
-        // ignore, not opened in Base or CDN blocked
-      }
+        if (id && id.username) setUsername('@' + id.username);
+      } catch(e){}
     }
     tryBaseOnchainKit();
 
-    // If using Farcaster SDK, it will set username below if present.
-    // Detect and use Farcaster SDK if injected:
     async function tryFarcasterSDK() {
       try {
-        // Farcaster mini app usage normally imports '@farcaster/miniapp-sdk' inside a proper build.
-        // In many clients, the SDK is injected. We'll try to read `window.__farcaster` or other context.
         if (window.__farcaster && window.__farcaster.user) {
-          setUsername('@' + (window.__farcaster.user.username || window.__farcaster.user.displayName || 'friend'));
+          setUsername('@' + (window.__farcaster.user.username || 'friend'));
           return;
         }
-        // If sdk available as global `sdk` from miniapp, use it:
         if (window.sdk && window.sdk.context && window.sdk.context.user) {
           setUsername('@' + (window.sdk.context.user.username || 'friend'));
           return;
         }
-      } catch(e){
-        // ignore
-      }
+      } catch(e){}
     }
     tryFarcasterSDK();
 
-    // Fallback: show generic text
     function setUsername(text) {
       document.getElementById('userInfo').textContent = 'Hi ' + text + '!';
       document.getElementById('usernameTag').textContent = text;
     }
 
-    // Provider detection and wallet connect (EIP-1193)
     async function detectProvider(){
       if (window.ethereum) return window.ethereum;
       if (window.web3 && window.web3.currentProvider) return window.web3.currentProvider;
@@ -211,7 +191,6 @@
     }
     connectBtn.addEventListener('click', connectWallet);
 
-    // Prefill if already connected
     (async function prefillIfConnected(){
       const provider = await detectProvider();
       if (!provider) return;
@@ -228,7 +207,6 @@
       } catch(e){}
     })();
 
-    // Form handling — client only
     function handleSubmit(e) {
       e.preventDefault();
       const wallet = walletInput.value.trim();
