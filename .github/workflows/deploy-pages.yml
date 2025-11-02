@@ -2,38 +2,32 @@ name: Deploy GitHub Pages with .well-known
 
 on:
   push:
-    branches: [ main ]  # change if your default branch is different
+    branches:
+      - main  # change if your default branch is not 'main'
+
+permissions:
+  contents: write  # allow publishing to gh-pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Prepare publish directory
         run: |
           set -e
           rm -rf publish
           mkdir publish
-          # copy everything except .git and GitHub workflow files (keeps repo root static site)
           rsync -av --exclude='.git' --exclude='.github' --exclude='publish' ./ publish/
-          # If we created well-known (no dot), rename it to .well-known inside publish
           if [ -d "publish/well-known" ]; then
             mv publish/well-known publish/.well-known
           fi
-          # show what will be published (for debug)
-          ls -la publish | sed -n '1,120p'
-          if [ -d "publish/.well-known" ]; then
-            echo ".well-known present and will be published"
-            ls -la publish/.well-known
-          else
-            echo "WARNING: publish/.well-known not found"
-          fi
+          echo "✅ .well-known prepared:"
+          ls -la publish
 
-      - name: Deploy to GitHub Pages (gh-pages branch)
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
