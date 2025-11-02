@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MONEME ON BASE - Closed Beta</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Social / OG -->
+  <meta property="og:title" content="MONEME ON BASE — Closed Beta" />
+  <meta property="og:description" content="Join the MONEME Closed Beta whitelist. Open inside Farcaster or Base App for automatic identity detection." />
+  <meta property="og:image" content="https://moneme.app/logo.png" />
+  <meta name="theme-color" content="#071028" />
+
+  <style>
+    :root{
+      --accent:#00d8ff;
+      --accent2:#9b4cff;
+      --bg1:#050817; --bg2:#09152b; --bg3:#162244;
+      --glass: rgba(255,255,255,0.03);
+    }
+    html,body{height:100%;margin:0;font-family:Inter, Arial, sans-serif;background:#000;}
+    body{
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;text-align:center;
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(155,76,255,0.10), transparent 5%),
+        radial-gradient(1000px 500px at 90% 80%, rgba(0,216,255,0.06), transparent 10%),
+        linear-gradient(270deg,var(--bg1),var(--bg2),var(--bg3));
+      background-size:cover;
+      overflow:auto;
+    }
+
+    .card{
+      width:100%; max-width:820px; padding:34px; border-radius:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 20px 60px rgba(7,12,30,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px) saturate(120%);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .logo-wrap{display:flex;align-items:center;gap:16px;justify-content:center}
+    .logo-wrap img{width:84px;height:84px;border-radius:16px;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,216,255,0.12));}
+    h1{margin:0;font-size:26px;letter-spacing:1.6px;text-transform:uppercase}
+    h2{margin:6px 0 18px;color:var(--accent);font-weight:400}
+
+    .btn{
+      display:inline-block;padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.06);
+      color:var(--accent); text-decoration:none;font-weight:700;cursor:pointer;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,216,255,0.06)}
+
+    .note{color:#bcd6e6;margin-top:12px;font-size:14px}
+
+    #whitelist{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:12px}
+    #whitelist h3{color:var(--accent);margin:0;text-transform:uppercase;letter-spacing:1px}
+    input[type="text"]{
+      width:420px; max-width:92%; padding:12px 14px;border-radius:999px;border:none;outline:none;
+      text-align:center;background:var(--glass);color:#fff;font-size:15px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+    }
+    .controls{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:8px}
+    #connectWallet{background:transparent;border:2px dashed rgba(255,255,255,0.06);color:#cfefff;padding:8px 14px;border-radius:20px;cursor:pointer}
+    #joinBtn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#041023;border:none;padding:10px 20px;border-radius:20px;cursor:pointer;font-weight:700}
+    #joinBtn[disabled]{opacity:0.5;cursor:not-allowed}
+    #walletAddr{font-size:13px;color:#bfefff;word-break:break-all;max-width:420px}
+
+    #thanksMessage{display:none;color:#7cffc6;font-weight:700;margin-top:8px;font-size:15px}
+
+    footer{margin-top:18px;font-size:13px;color:#93b7c7}
+
+    .glow {
+      padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 6px 30px rgba(15,40,80,0.4), 0 0 40px rgba(0,216,255,0.06) inset;
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;
+    }
+
+    @media (max-width:520px){
+      .card{padding:20px}
+      .logo-wrap img{width:64px;height:64px}
+      input[type="text"]{width:280px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="logo-wrap">
+      <img src="logo.png" alt="MONEME logo">
+      <div>
+        <h1>MONEME ON BASE</h1>
+        <h2>🚀 Coming Soon</h2>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <a class="btn" href="https://linktr.ee/monemeonbase" target="_blank" rel="noopener">Follow Us Here</a>
+    </div>
+
+    <p class="note">Access the MONEME Closed Beta whitelist — open inside Farcaster or Base App for automatic identity detection.</p>
+
+    <!-- Whitelist Section -->
+    <div id="whitelist" class="glow">
+      <h3>MONEME Closed Beta Access</h3>
+
+      <div id="userInfo" style="margin-bottom:10px; font-size:16px; color:#7cffc6;">Detecting identity...</div>
+
+      <div id="connectRow" class="controls">
+        <button id="connectWallet" type="button">Connect Wallet (optional)</button>
+        <div id="walletAddr" style="display:none;"></div>
+      </div>
+
+      <form id="whitelistForm" style="display:flex;flex-direction:column;align-items:center;gap:8px" onsubmit="return handleSubmit(event)">
+        <input id="walletInput" type="text" placeholder="Paste your EVM wallet address (or connect)" required />
+        <div class="controls">
+          <button id="joinBtn" type="submit">Join Whitelist</button>
+        </div>
+      </form>
+
+      <p id="thanksMessage">✅ Thanks <span id="usernameTag">friend</span>! You’re on the MONEME Closed Beta Whitelist.</p>
+
+      <footer>Tip: For identity auto-fill, open this page inside Farcaster or Base App (in-app browser).</footer>
+    </div>
+  </div>
+
+  <script type="module">
+    let triedOnchainKit = false;
+    async function tryBaseOnchainKit() {
+      try {
+        triedOnchainKit = true;
+        const { createOnchainKit } = await import('https://cdn.jsdelivr.net/npm/@base-org/onchainkit/dist/index.min.js');
+        const onchain = createOnchainKit({ appName: 'MONEME', appURL: 'https://moneme.app' });
+        const id = await onchain.identity.get().catch(()=>null);
+        if (id && id.username) setUsername('@' + id.username);
+      } catch(e){}
+    }
+    tryBaseOnchainKit();
+
+    async function tryFarcasterSDK() {
+      try {
+        if (window.__farcaster && window.__farcaster.user) {
+          setUsername('@' + (window.__farcaster.user.username || 'friend'));
+          return;
+        }
+        if (window.sdk && window.sdk.context && window.sdk.context.user) {
+          setUsername('@' + (window.sdk.context.user.username || 'friend'));
+          return;
+        }
+      } catch(e){}
+    }
+    tryFarcasterSDK();
+
+    function setUsername(text) {
+      document.getElementById('userInfo').textContent = 'Hi ' + text + '!';
+      document.getElementById('usernameTag').textContent = text;
+    }
+
+    async function detectProvider(){
+      if (window.ethereum) return window.ethereum;
+      if (window.web3 && window.web3.currentProvider) return window.web3.currentProvider;
+      return null;
+    }
+
+    const connectBtn = document.getElementById('connectWallet');
+    const walletAddrDiv = document.getElementById('walletAddr');
+    const walletInput = document.getElementById('walletInput');
+    const usernameTag = document.getElementById('usernameTag');
+
+    async function connectWallet() {
+      const provider = await detectProvider();
+      if (!provider) {
+        alert('No injected wallet detected. Open this page inside Base App or Farcaster (with wallet) or use a wallet-enabled browser.');
+        return;
+      }
+      try {
+        const accounts = await provider.request({ method: 'eth_requestAccounts' });
+        const address = accounts && accounts[0];
+        if (address) {
+          walletAddrDiv.style.display = 'block';
+          walletAddrDiv.textContent = 'Connected: ' + address;
+          walletInput.value = address;
+          connectBtn.textContent = 'Wallet Connected';
+          connectBtn.disabled = true;
+        }
+      } catch(e){
+        alert('Wallet connection failed or was rejected.');
+      }
+    }
+    connectBtn.addEventListener('click', connectWallet);
+
+    (async function prefillIfConnected(){
+      const provider = await detectProvider();
+      if (!provider) return;
+      try {
+        const accounts = await provider.request({ method: 'eth_accounts' });
+        if (accounts && accounts.length > 0) {
+          const address = accounts[0];
+          walletAddrDiv.style.display = 'block';
+          walletAddrDiv.textContent = 'Connected: ' + address;
+          walletInput.value = address;
+          connectBtn.textContent = 'Wallet Connected';
+          connectBtn.disabled = true;
+        }
+      } catch(e){}
+    })();
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const wallet = walletInput.value.trim();
+      if (!wallet || wallet.length < 10) {
+        alert('Please paste a valid wallet address or connect your wallet.');
+        return false;
+      }
+      document.getElementById('whitelistForm').style.display = 'none';
+      document.getElementById('thanksMessage').style.display = 'block';
+      console.log('MONEME whitelist (client-only):', { wallet, username: usernameTag.textContent });
+      return false;
+    }
+    window.handleSubmit = handleSubmit;
+  </script>
+</body>
+</html>
