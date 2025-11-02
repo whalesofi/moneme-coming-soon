@@ -1,12 +1,24 @@
 {
   "miniapp": {
     "version": "1",
-    "name": "MONEME Whitelist MiniApp",
+    "name": "MONEME",
     "iconUrl": "https://moneme.app/logo.png",
     "homeUrl": "https://moneme.app",
-    "buttonTitle": "Join MONEME Whitelist",
-    "description": "MONEME on Base — join our Closed Beta whitelist and be part of the next wave.",
-    "splashImageUrl": "https://moneme.app/logo.png",
-    "splashBackgroundColor": "#0a0f24"
+    "subtitle": "SocialFi on Base",
+    "description": "Join the MONEME Closed Beta — Social Finance redefined on Base.",
+    "splashImageUrl": "https://moneme.app/splash.png",
+    "splashBackgroundColor": "#0a0f24",
+    "primaryCategory": "finance",
+    "tags": ["socialfi", "base", "whitelist", "moneme"],
+    "heroImageUrl": "https://moneme.app/og.png",
+    "tagline": "The Future of Social Finance",
+    "ogTitle": "MONEME",
+    "ogDescription": "Join the next wave of SocialFi on Base.",
+    "ogImageUrl": "https://moneme.app/og.png",
+    "requiredChains": ["eip155:8453"],
+    "requiredCapabilities": [
+      "actions.signIn",
+      "wallet.getEthereumProvider"
+    ]
   }
 }
