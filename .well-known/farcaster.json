@@ -1,0 +1,12 @@
+{
+  "miniapp": {
+    "version": "1",
+    "name": "MONEME Whitelist MiniApp",
+    "iconUrl": "https://moneme.app/logo.png",
+    "homeUrl": "https://moneme.app",
+    "buttonTitle": "Join MONEME Whitelist",
+    "description": "MONEME on Base — join our Closed Beta whitelist and be part of the next wave.",
+    "splashImageUrl": "https://moneme.app/logo.png",
+    "splashBackgroundColor": "#0a0f24"
+  }
+}
